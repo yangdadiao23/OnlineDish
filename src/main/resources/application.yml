@@ -1,0 +1,34 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/test?serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    hikari:
+      auto-commit: true
+    #空闲连接超时时长
+      idle-timeout: 60000
+    #连接超时时长
+      connection-timeout: 60000
+    #最大生命周期，0不过期
+      max-lifetime: 0
+    #最小空闲连接数
+      minimum-idle: 100
+    #最大连接数量
+      maximum-pool-size: 1000
+
+  banner:
+    image:
+      location: classpath:banner.txt
+  thymeleaf:
+    prefix: classpath:templates/
+    suffix: .html
+
+
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: flag  # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
+      logic-delete-value: -1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+
