@@ -11,8 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Configuration
-@Order(value = 2)
+//@Configuration
+//@Order(value = 1)
 public class AdminWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -26,7 +26,7 @@ public class AdminWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
-                .loginPage("/login.html")
+                .loginPage("/adminLogin.html")
                 .loginProcessingUrl("/admin/login")
                 .defaultSuccessUrl("/getAllDish").permitAll()
                 .and().authorizeRequests()

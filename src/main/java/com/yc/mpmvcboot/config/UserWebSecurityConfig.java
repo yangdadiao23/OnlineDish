@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Configuration
-@Order(value = 1)
+//@Configuration
+//@Order(value = 2)
 public class UserWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
@@ -28,7 +28,7 @@ public class UserWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
-                .loginPage("/login.html")
+                .loginPage("/userLogin.html")
                 .loginProcessingUrl("/user/login")
                 .defaultSuccessUrl("/index").permitAll()
                 .and().authorizeRequests()
@@ -39,9 +39,9 @@ public class UserWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.exceptionHandling().accessDeniedPage("/403.html");
         http.logout().logoutUrl("/logout").logoutSuccessUrl("/index");
-
-
     }
+
+
 
     @Bean
     PasswordEncoder password(){

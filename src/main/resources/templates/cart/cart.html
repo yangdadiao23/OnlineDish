@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>student</title>
-
+    <meta charset="UTF-8">
+    <title>cart</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
@@ -15,22 +12,20 @@
 <body>
 <table class="table">
   <tr>
-    <td>number</td>
+    <td>id</td>
     <td>name</td>
-    <td>age</td>
-    <td>insertTime</td>
-    <td>updateTime</td>
+    <td>count</td>
+    <td>price</td>
   </tr>
 
-  <tr th:each="student:${students}">
-    <td>[[${student.id}]]</td>
-    <td>[[${student.name}]]</td>
-    <td>[[${student.age}]]</td>
-    <td>[[${student.insertTime}]]</td>
-    <td>[[${student.updateTime}]]</td>
+  <tr th:each="map:${map}">
+    <td>[[${map.key.id}]]</td>
+    <td>[[${map.key.name}]]</td>
+    <td>[[${map.value}]]</td>
+    <td th:text="${map.key.price}*${map.value}"></td>
   </tr>
-
-
+  <h3><samp>总价：[[${totalPrice}]]</samp></h3>
+  <h4><a th:href="@{/user/getAllDish}">返回点餐页面</a> </h4>
 </table>
 </body>
 </html>

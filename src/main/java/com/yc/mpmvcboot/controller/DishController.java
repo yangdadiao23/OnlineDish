@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -16,6 +15,11 @@ public class DishController {
 
     @Autowired
     private DishServiceImpl dishService;
+
+    @GetMapping("/index")
+    public  String index(){
+        return "index.html";
+    }
 
     @GetMapping("/getAllDish")
     public String getAll(Model model){
@@ -57,6 +61,7 @@ public class DishController {
         dishService.getBaseMapper().insert(dish);
         return "redirect:/getAllDish";
     }
+
 
 
 
