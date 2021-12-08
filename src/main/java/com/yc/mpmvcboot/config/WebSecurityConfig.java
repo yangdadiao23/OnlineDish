@@ -1,6 +1,7 @@
 package com.yc.mpmvcboot.config;
 
 import com.yc.mpmvcboot.details.AdminDetail;
+import com.yc.mpmvcboot.successHandler.LoginSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfig {
 
        @Configuration
-       @Order(2)
+       @Order(1)
     static class AdminWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
            @Autowired
@@ -30,9 +31,11 @@ public class WebSecurityConfig {
            @Override
            protected void configure(HttpSecurity http) throws Exception {
                http.formLogin()
+                       .successHandler(new LoginSuccessHandler())
                        .loginPage("/adminLogin.html")
                        .loginProcessingUrl("/admin/login")
-                       .defaultSuccessUrl("/getAllDish").permitAll()
+//                       .defaultSuccessUrl("/adminIndex").permitAll()
+                       .permitAll()
                        .and().authorizeRequests()
                        .antMatchers("/getAllDish", "/deleteDish", "/addDish").hasAuthority("admin")
                        .anyRequest().authenticated()
@@ -51,7 +54,7 @@ public class WebSecurityConfig {
        }
 
        @Configuration
-       @Order(1)
+       @Order(2)
     static class UserWebSecurityConfig extends WebSecurityConfigurerAdapter {
         @Autowired
         private UserDetailsService userDetailsService;

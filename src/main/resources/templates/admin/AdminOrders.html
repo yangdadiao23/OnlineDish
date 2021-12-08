@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>cart</title>
+  <meta charset="UTF-8">
+  <title>orders</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
@@ -12,21 +12,22 @@
 <body>
 <table class="table">
   <tr>
-    <td>id</td>
-    <td>name</td>
-    <td>count</td>
+    <td>uuid</td>
+    <td>userid</td>
     <td>price</td>
+    <td>date</td>
   </tr>
 
-  <tr th:each="map:${map}">
-    <td>[[${map.key.id}]]</td>
-    <td>[[${map.key.name}]]</td>
-    <td>[[${map.value}]]</td>
-    <td th:text="${map.key.price}*${map.value}"></td>
+  <tr th:each="order:${orders}">
+    <td>[[${order.uuid}]]</td>
+    <td>[[${order.userid}]]</td>
+    <td>[[${order.price}]]</td>
+    <td>[[${order.date}]]</td>
+<!--    <td><a class="btn btn-default" th:href="@{/deleteDish/}+${dish.id}" role="button">删除</a></td>-->
+<!--    <td><a class="btn btn-default" th:href="@{/updateHtml/}+${dish.id}" role="button">修改</a></td>-->
   </tr>
-  <h4><a th:href="@{/user/getAllDish}">返回点餐页面</a> </h4>
-  <h3><samp>总价：[[${totalPrice}]]</samp></h3>
-  <h2><a class="btn btn-default" th:href="@{/orderDish/}+${totalPrice}" role="button">下单</a></h2>
+<!--  <h3><a class="btn btn-default" th:href="@{/addHtml}" role="button">添加</a></h3>-->
 </table>
+
 </body>
 </html>

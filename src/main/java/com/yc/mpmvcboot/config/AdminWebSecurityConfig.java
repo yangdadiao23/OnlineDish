@@ -18,17 +18,17 @@ public class AdminWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AdminDetail adminDetail;
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(adminDetail).passwordEncoder(Password());
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(adminDetail).passwordEncoder(Password());
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
                 .loginPage("/adminLogin.html")
                 .loginProcessingUrl("/admin/login")
-                .defaultSuccessUrl("/getAllDish").permitAll()
+                .defaultSuccessUrl("/adminIndex").permitAll()
                 .and().authorizeRequests()
                 .antMatchers("/getAllDish","/deleteDish","/addDish").hasAuthority("admin")
                 .anyRequest().authenticated()
