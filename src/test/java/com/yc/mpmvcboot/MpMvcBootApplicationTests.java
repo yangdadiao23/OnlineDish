@@ -2,8 +2,10 @@ package com.yc.mpmvcboot;
 
 import com.yc.mpmvcboot.pojo.Dish;
 import com.yc.mpmvcboot.pojo.Orders;
+import com.yc.mpmvcboot.pojo.User;
 import com.yc.mpmvcboot.service.serviceImpl.DishServiceImpl;
 import com.yc.mpmvcboot.service.serviceImpl.OrderServiceImpl;
+import com.yc.mpmvcboot.service.serviceImpl.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,6 +21,8 @@ class MpMvcBootApplicationTests {
     @Autowired
     private OrderServiceImpl orderService;
 
+    @Autowired
+    private UserServiceImpl userService;
 
 
     @Autowired
@@ -43,6 +47,12 @@ class MpMvcBootApplicationTests {
         order.setUserid(3);
         order.setDate(new Date());
         orderService.getBaseMapper().insert(order);
+    }
+
+    @Test
+    public  void test(){
+        User user = userService.getBaseMapper().selectById(2);
+        System.out.println(user);
     }
 
 }

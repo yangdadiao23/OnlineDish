@@ -2,6 +2,7 @@ package com.yc.mpmvcboot.controller;
 
 import com.yc.mpmvcboot.pojo.Dish;
 import com.yc.mpmvcboot.service.serviceImpl.DishServiceImpl;
+import org.apache.tomcat.util.descriptor.web.SecurityRoleRef;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,11 @@ public class UserController {
         List<Dish> dishes = dishService.getBaseMapper().selectList(null);
         model.addAttribute("dishes",dishes);
         return "userDishes";
+    }
+
+    @GetMapping("/user/registerHtml")
+    public String userRegisterHtml(){
+        return "user/registerHtml";
     }
 
 

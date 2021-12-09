@@ -23,10 +23,11 @@ public class UserDetail implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-         List<GrantedAuthority> auths= AuthorityUtils.commaSeparatedStringToAuthorityList("role,admin");
         QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
             userQueryWrapper.eq("username", s);
         User user = userService.getOne(userQueryWrapper);
+        String role = user.getRole();
+        List<GrantedAuthority> auths= AuthorityUtils.commaSeparatedStringToAuthorityList(role);
         if(user==null){
              throw new UsernameNotFoundException("user not found!");
         }else{
