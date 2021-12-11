@@ -28,7 +28,6 @@ public class DishController {
         return "allDishes";
     }
 
-
     @GetMapping("/deleteDish/{id}")
     public String deleteDish(@PathVariable("id")Integer id){
         dishService.removeById(id);
@@ -48,13 +47,10 @@ public class DishController {
         return "redirect:/getAllDish";
     }
 
-
-
     @GetMapping("/addHtml")
     public  String  addHtml(){
         return "addHtml";
     }
-
 
     @GetMapping("/addCheck")
     public  String  addCheck(Dish dish){

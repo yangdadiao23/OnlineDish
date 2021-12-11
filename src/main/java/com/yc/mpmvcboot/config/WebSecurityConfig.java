@@ -14,8 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-
     @Autowired
     private  UserDetailsService userDetailsService;
 
@@ -23,16 +21,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(password());
     }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
                 .successHandler(new LoginSuccessHandler())
                 .loginPage("/userLogin.html")
+//                .loginPage("/login")
                 .loginProcessingUrl("/user/login").
                 permitAll()
                 .and().authorizeRequests()
-                .antMatchers("/user/registerHtml").permitAll()
+                .antMatchers("/user/registerHtml","/user/register","/login").permitAll()
                 .antMatchers("/getAllDish","//deleteDish/{id}","/updateHtml/{id}","/updateCheck/{id}","/addHtml","/addCheck").hasAuthority("admin")
                 .anyRequest().authenticated()
                 .and().csrf().disable();
@@ -40,8 +38,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.exceptionHandling().accessDeniedPage("/403.html");
         http.logout().logoutUrl("/logout").logoutSuccessUrl("/index");
     }
-
-
 
     @Bean
     PasswordEncoder password(){

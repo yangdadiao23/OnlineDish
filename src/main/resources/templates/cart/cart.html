@@ -26,7 +26,10 @@
   </tr>
   <h4><a th:href="@{/user/getAllDish}">返回点餐页面</a> </h4>
   <h3><samp>总价：[[${totalPrice}]]</samp></h3>
-  <h2><a class="btn btn-default" th:href="@{/orderDish/}+${totalPrice}" role="button">下单</a></h2>
+  <h2>
+    <a class="btn btn-default" th:href="@{/orderDish/}+${totalPrice}" role="button">下单</a>
+    <a class="btn btn-default" th:href="@{/deleteCart}" role="button">清空购物车</a>
+  </h2>
 </table>
 </body>
 </html>

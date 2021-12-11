@@ -51,8 +51,14 @@ class MpMvcBootApplicationTests {
 
     @Test
     public  void test(){
-        User user = userService.getBaseMapper().selectById(2);
-        System.out.println(user);
+        User user=new User();
+        user.setUsername("qwer");
+        user.setPassword("qwer");
+        user.setRole("user");
+        int insert = userService.getBaseMapper().insert(user);
+        System.out.println(insert);
     }
+
+
 
 }

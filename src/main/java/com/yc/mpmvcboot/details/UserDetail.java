@@ -20,7 +20,6 @@ public class UserDetail implements UserDetailsService {
     @Autowired
     private UserServiceImpl userService;
 
-
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();

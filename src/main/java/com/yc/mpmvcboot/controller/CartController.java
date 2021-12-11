@@ -18,7 +18,6 @@ public class CartController {
 
     private Cart cart=new Cart();
 
-
     @GetMapping("/addCart/{id}")
     public  String addCart(@PathVariable Integer id){
         Dish dish = dishService.getBaseMapper().selectById(id);
@@ -26,8 +25,6 @@ public class CartController {
         map.put(dish,map.getOrDefault(dish,0)+1);
         return "forward:/user/getAllDish";
     }
-
-
 
     @GetMapping("/showCart")
     public  String showCart(Model model){
@@ -40,5 +37,11 @@ public class CartController {
         }
         model.addAttribute("totalPrice",totalPrice);
         return "cart/cart";
+    }
+
+    @GetMapping("/deleteCart")
+    public  String deleteCart(){
+        cart.getMap().clear();
+        return "forward:/showCart";
     }
 }
