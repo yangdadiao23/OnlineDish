@@ -16,15 +16,21 @@
     <td>name</td>
     <td>count</td>
     <td>price</td>
+    <td>totalPrice</td>
+    <td>add</td>
+    <td>dec</td>
   </tr>
 
   <tr th:each="map:${map}">
-    <td>[[${map.key.id}]]</td>
-    <td>[[${map.key.name}]]</td>
-    <td>[[${map.value}]]</td>
-    <td th:text="${map.key.price}*${map.value}"></td>
+    <td>[[${map.value.id}]]</td>
+    <td>[[${map.value.name}]]</td>
+    <td>[[${map.value.count}]]</td>
+    <td>[[${map.value.price}]]</td>
+    <td>[[${map.value.totalPrice}]]</td>
+    <td><a class="btn btn-default" role="button" th:href="@{/addOne/}+${map.key}" >+</a></td>
+    <td><a class="btn btn-default" role="button" th:href="@{/deleteOne/}+${map.key}">-</a></td>
   </tr>
-  <h4><a th:href="@{/user/getAllDish}">返回点餐页面</a> </h4>
+  <h4><a th:href="@{/user/getAllDish}">返回点餐页面</a></h4>
   <h3><samp>总价：[[${totalPrice}]]</samp></h3>
   <h2>
     <a class="btn btn-default" th:href="@{/orderDish/}+${totalPrice}" role="button">下单</a>

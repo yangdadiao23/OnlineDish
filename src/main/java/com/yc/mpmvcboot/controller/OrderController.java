@@ -32,6 +32,7 @@ public class OrderController {
         User user=users.get(0);
         Integer userid=user.getId();
         Orders orders = new Orders(UUID.randomUUID().toString(),price,userid,new Date());
+        orderService.getBaseMapper().insert(orders);
         request.setAttribute("order",orders);
         request.setAttribute("name",user.getUsername());
         return "order/order";
