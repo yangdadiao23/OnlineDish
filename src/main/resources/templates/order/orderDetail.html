@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>orders</title>
+    <meta charset="UTF-8">
+    <title>orderDetail</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
@@ -12,22 +12,18 @@
 <body>
 <table class="table">
   <tr>
-    <td>uuid</td>
-    <td>userid</td>
+    <td>name</td>
     <td>price</td>
-    <td>date</td>
-    <td></td>
+    <td>count</td>
+    <td>totalPrice</td>
   </tr>
-
-  <tr th:each="order:${orders}">
-    <td>[[${order.uuid}]]</td>
-    <td>[[${order.userid}]]</td>
-    <td>[[${order.price}]]</td>
-    <td>[[${order.date}]]</td>
-    <td><a th:href="@{/getAdminOrderDetails/}+${order.uuid}">查看详情</a> </td>
+  <tr th:each="orderItem:${orderItems}">
+    <td>[[${orderItem.name}]]</td>
+    <td>[[${orderItem.price}]]</td>
+    <td>[[${orderItem.count}]]</td>
+    <td>[[${orderItem.totalPrice}]]</td>
   </tr>
-  <h3><a class="btn btn-default" th:href="@{/adminIndex}" role="button">返回主页</a></h3>
+  <h4><a th:href="@{/user/getDishByPage/1}">返回点餐页面</a> </h4>
 </table>
-
 </body>
 </html>

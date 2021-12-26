@@ -1,6 +1,7 @@
 package com.yc.mpmvcboot.successHandler;
 
 import com.yc.mpmvcboot.service.serviceImpl.UserServiceImpl;
+import com.yc.mpmvcboot.utils.CodeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,6 +25,11 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         String role=new String();
+        if(!CodeUtils.checkVerifyCode(httpServletRequest)){
+            httpServletRequest.getSession().setAttribute("message","验证码错误");
+            httpServletResponse.sendRedirect("/logout");
+            return;
+        }
         for(GrantedAuthority g:authorities){
             role = g.getAuthority();
         }

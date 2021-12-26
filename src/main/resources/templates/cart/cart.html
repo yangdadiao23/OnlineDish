@@ -27,14 +27,14 @@
     <td>[[${map.value.count}]]</td>
     <td>[[${map.value.price}]]</td>
     <td>[[${map.value.totalPrice}]]</td>
-    <td><a class="btn btn-default" role="button" th:href="@{/addOne/}+${map.key}" >+</a></td>
-    <td><a class="btn btn-default" role="button" th:href="@{/deleteOne/}+${map.key}">-</a></td>
+    <td><a class="btn btn-default" role="button" th:href="@{/addOne/}+${map.key}+'/'+${pageNum}" >+</a></td>
+    <td><a class="btn btn-default" role="button" th:href="@{/deleteOne/}+${map.key}+'/'+${pageNum}">-</a></td>
   </tr>
-  <h4><a th:href="@{/user/getAllDish}">返回点餐页面</a></h4>
+  <h4><a th:href="@{/user/getDishByPage/}+${pageNum}">返回点餐页面</a></h4>
   <h3><samp>总价：[[${totalPrice}]]</samp></h3>
   <h2>
     <a class="btn btn-default" th:href="@{/orderDish/}+${totalPrice}" role="button">下单</a>
-    <a class="btn btn-default" th:href="@{/deleteCart}" role="button">清空购物车</a>
+    <a class="btn btn-default" th:href="@{/deleteCart/}+${pageNum}" role="button">清空购物车</a>
   </h2>
 </table>
 </body>

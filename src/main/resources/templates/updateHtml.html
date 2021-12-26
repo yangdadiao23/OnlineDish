@@ -10,7 +10,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 </head>
 <body>
-<form class="form-inline" th:action="@{/updateCheck/}+${dish.id}">
+<form class="form-inline" th:action="@{/updateCheck/}+${dish.id}+'/'+${pageNum}">
   <div class="form-group">
     <label for="exampleInputName2">Name</label>
     <input type="text" name="name" class="form-control" id="exampleInputName2" th:value="${dish.name}">

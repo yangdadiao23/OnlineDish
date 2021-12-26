@@ -16,6 +16,8 @@
         <td>name</td>
         <td>num</td>
         <td>price</td>
+        <td></td>
+        <td></td>
     </tr>
 
     <tr th:each="dish:${dishes}">
@@ -23,12 +25,49 @@
         <td>[[${dish.name}]]</td>
         <td>[[${dish.num}]]</td>
         <td>[[${dish.price}]]</td>
-        <td><a class="btn btn-default" th:href="@{/deleteDish/}+${dish.id}" role="button">删除</a></td>
-        <td><a class="btn btn-default" th:href="@{/updateHtml/}+${dish.id}" role="button">修改</a></td>
+        <td><a class="btn btn-default" th:href="@{/deleteDish/}+${dish.id}+'/'+${dishNum}+'/'+${pageNum}" role="button">删除</a></td>
+        <td><a class="btn btn-default" th:href="@{/updateHtml/}+${dish.id}+'/'+${pageNum}" role="button">修改</a></td>
     </tr>
+
     <h3><a class="btn btn-default" th:href="@{/adminIndex}" role="button">返回主页</a></h3>
     <h3><a class="btn btn-default" th:href="@{/addHtml}" role="button">添加</a></h3>
+    <form th:action="@{/searchByName/1}">
+        <div class="col-lg-6">
+            <div class="input-group">
+                <input type="text" name="dishName"  class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+        <input class="btn btn-default" type="submit" value="go!"></input>
+      </span>
+            </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+        </div><!-- /.row -->
+    </form>
+
 </table>
 
+<nav aria-label="Page navigation"class="text-center">
+    <ul class="pagination" style="margin-top: 5px" th:style="center" >
+        <li th:if="${pageNum>1}" th:class="${pageNum==1}?'disabled' : ''"><a th:href="@{/admin/getDishByPage/} + ${pageNum-1} "
+                                                                             id="lastPage"><span aria-hidden="true">上一页</a></li>
+        <li th:if="${pageNum-3 >=1}"><a th:text="${pageNum -3}"
+                                        th:href="@{/admin/getDishByPage/} + ${pageNum-3}">1</a></li>
+        <li th:if="${pageNum-2 >=1}"><a th:text="${pageNum -2}"
+                                        th:href="@{/admin/getDishByPage/}  + ${pageNum-2}">1</a></li>
+        <li th:if="${pageNum-1 >=1}"><a th:text="${pageNum -1}"
+                                        th:href="@{/admin/getDishByPage/} + ${pageNum-1}">1</a></li>
+        <li class="active"><a href="#" th:text="${pageNum}" id="nowPage">1</a></li>
+
+        <p hidden th:text="${pages}" id="pages"></p>
+
+        <li th:if="${pageNum+1 <=pages}"><a th:href="@{/admin/getDishByPage/} + ${pageNum+1}"
+                                            th:text="${pageNum +1}">1</a></li>
+        <li th:if="${pageNum+2 <=pages}"><a th:href="@{/admin/getDishByPage/} + ${pageNum+2}"
+                                            th:text="${pageNum +2}">1</a></li>
+        <li th:if="${pageNum+3 <=pages}"><a th:href="@{/admin/getDishByPage/} + ${pageNum+3}"
+                                            th:text="${pageNum +3}">1</a></li>
+
+        <li th:if="${pageNum<pages}"  th:class="${pageNum==pages}?'disabled' : ''" ><a th:href="@{/admin/getDishByPage/} + ${pageNum+1}" id="finallyPage">下一页</a></li>
+    </ul>
+</nav>
 </body>
 </html>

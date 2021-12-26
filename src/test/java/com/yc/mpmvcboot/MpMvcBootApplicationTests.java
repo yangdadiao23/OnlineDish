@@ -1,5 +1,6 @@
 package com.yc.mpmvcboot;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yc.mpmvcboot.pojo.Dish;
 import com.yc.mpmvcboot.pojo.Orders;
 import com.yc.mpmvcboot.pojo.User;
@@ -10,10 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @SpringBootTest
 class MpMvcBootApplicationTests {
@@ -45,20 +43,18 @@ class MpMvcBootApplicationTests {
         order.setUuid(uuid.toString());
         order.setPrice(65);
         order.setUserid(3);
-        order.setDate(new Date());
+        order.setDate(new Date().toString());
         orderService.getBaseMapper().insert(order);
     }
 
     @Test
     public  void test(){
-        User user=new User();
-        user.setUsername("qwer");
-        user.setPassword("qwer");
-        user.setRole("user");
-        int insert = userService.getBaseMapper().insert(user);
-        System.out.println(insert);
+        Page<Dish> page = dishService.page(new Page<>(2, 3));
+        long pages = page.getPages();
+        long current = page.getCurrent();
+        long size = page.getSize();
+        System.out.println(pages);
+        List<Dish> records = page.getRecords();
+        records.stream().forEach(System.out::println);
     }
-
-
-
 }

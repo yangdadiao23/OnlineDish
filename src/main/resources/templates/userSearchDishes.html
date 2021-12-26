@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Dish</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+  <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+</head>
+<body>
+<table class="table">
+  <tr>
+    <td>id</td>
+    <td>name</td>
+    <td>num</td>
+    <td>price</td>
+    <td></td>
+  </tr>
+
+  <tr th:each="dish:${dishes}">
+    <td>[[${dish.id}]]</td>
+    <td>[[${dish.name}]]</td>
+    <td>[[${dish.num}]]</td>
+    <td>[[${dish.price}]]</td>
+    <td><a class="btn btn-default" th:href="@{/addSearchCart/}+${dish.id}+'/'+${pageNum}+'?dishName='+${dishName}" role="button">点餐</a></td>
+  </tr>
+
+  <h3><a class="btn btn-default" th:href="@{/showCart/}+${pageNum}" role="button">查看购物车</a></h3>
+  <h3><a class="btn btn-default" th:href="@{/getOrders}" role="button">查看所有订单</a></h3>
+  <h3><a class="btn btn-default" th:href="@{/user/getDishByPage/1}" role="button">返回主页</a></h3>
+  <form th:action="@{/userSearchByName/1}">
+    <div class="col-lg-6">
+      <div class="input-group">
+        <input type="text" name="dishName"  class="form-control" placeholder="Search for...">
+        <span class="input-group-btn">
+        <input class="btn btn-default" type="submit" value="go!"></input>
+      </span>
+      </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
+  </form>
+
+</table>
+
+<nav aria-label="Page navigation"class="text-center">
+  <ul class="pagination" style="margin-top: 5px" th:style="center" >
+    <li th:if="${pageNum>1}" th:class="${pageNum==1}?'disabled' : ''"><a th:href="@{/userSearchByName/} + ${pageNum-1}+'?dishName='+${dishName} "
+                                                                         id="lastPage"><span aria-hidden="true">上一页</a></li>
+    <li th:if="${pageNum-3 >=1}"><a th:text="${pageNum -3}"
+                                    th:href="@{/userSearchByName/} + ${pageNum-3}+'?dishName='+${dishName}">1</a></li>
+    <li th:if="${pageNum-2 >=1}"><a th:text="${pageNum -2}"
+                                    th:href="@{/userSearchByName/}  + ${pageNum-2}+'?dishName='+${dishName}">1</a></li>
+    <li th:if="${pageNum-1 >=1}"><a th:text="${pageNum -1}"
+                                    th:href="@{/userSearchByName/} + ${pageNum-1}+'?dishName='+${dishName}">1</a></li>
+    <li class="active"><a href="#" th:text="${pageNum}" id="nowPage">1</a></li>
+
+    <p hidden th:text="${pages}" id="pages"></p>
+
+    <li th:if="${pageNum+1 <=pages}"><a th:href="@{/userSearchByName/} + ${pageNum+1}+'?dishName='+${dishName}"
+                                        th:text="${pageNum +1}">1</a></li>
+    <li th:if="${pageNum+2 <=pages}"><a th:href="@{/userSearchByName/} + ${pageNum+2}+'?dishName='+${dishName}"
+                                        th:text="${pageNum +2}">1</a></li>
+    <li th:if="${pageNum+3 <=pages}"><a th:href="@{/userSearchByName/} + ${pageNum+3}+'?dishName='+${dishName}"
+                                        th:text="${pageNum +3}">1</a></li>
+
+    <li th:if="${pageNum<pages}"  th:class="${pageNum==pages}?'disabled' : ''" ><a th:href="@{/userSearchByName/} + ${pageNum+1}+'?dishName='+${dishName}" id="finallyPage">下一页</a></li>
+  </ul>
+</nav>
+<h3><a  class="btn btn-default" href="/logout">退出</a></h3>
+</body>
+</html>

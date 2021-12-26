@@ -5,15 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.util.Date;
-
 @Data
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Orders {
-    private  String uuid;
+public class OrdersItem {
+    private  Integer id;
+    private  String name;
     private  float price;
-    private  Integer userid;
-    private String date;
+    private  Integer count;
+    private  float totalPrice;
+    private  String uuid;
 }

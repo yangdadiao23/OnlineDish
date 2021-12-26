@@ -16,14 +16,16 @@
     <td>userName</td>
     <td>price</td>
     <td>date</td>
+    <td></td>
   </tr>
   <tr>
     <td>[[${order.uuid}]]</td>
     <td>[[${name}]]</td>
     <td>[[${order.price}]]</td>
     <td>[[${order.date}]]</td>
+    <td><a th:href="@{/getOrderDetails/}+${uuid}">查看详情</a> </td>
   </tr>
-  <h4><a th:href="@{/user/getAllDish}">返回点餐页面</a> </h4>
+  <h4><a th:href="@{/user/getDishByPage/1}">返回点餐页面</a> </h4>
 </table>
 </body>
 </html>
