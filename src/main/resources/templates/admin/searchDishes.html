@@ -13,6 +13,7 @@
 <table class="table">
   <tr>
     <td>id</td>
+    <td>photo</td>
     <td>name</td>
     <td>num</td>
     <td>price</td>
@@ -22,6 +23,7 @@
 
   <tr th:each="dish:${dishes}">
     <td>[[${dish.id}]]</td>
+    <td><img th:src="@{/photo/}+${dish.photo}"  class="img-responsive" alt="Responsive image"></td>
     <td>[[${dish.name}]]</td>
     <td>[[${dish.num}]]</td>
     <td>[[${dish.price}]]</td>

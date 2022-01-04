@@ -10,4 +10,5 @@ public class Dish {
    private  String name;
    private  int num;
    private  float price;
+   private  String photo;
 }

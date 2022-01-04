@@ -1,16 +1,19 @@
 package com.yc.mpmvcboot;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.sun.imageio.plugins.common.ImageUtil;
 import com.yc.mpmvcboot.pojo.Dish;
 import com.yc.mpmvcboot.pojo.Orders;
-import com.yc.mpmvcboot.pojo.User;
 import com.yc.mpmvcboot.service.serviceImpl.DishServiceImpl;
 import com.yc.mpmvcboot.service.serviceImpl.OrderServiceImpl;
+import com.yc.mpmvcboot.service.serviceImpl.QiniuServiceImpl;
 import com.yc.mpmvcboot.service.serviceImpl.UserServiceImpl;
+import com.yc.mpmvcboot.utils.PhotoUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.IOException;
 import java.util.*;
 
 @SpringBootTest
@@ -25,6 +28,9 @@ class MpMvcBootApplicationTests {
 
     @Autowired
     private DishServiceImpl dishService;
+
+    @Autowired
+    private QiniuServiceImpl qiniuService;
 
     @Test
     public  void Test(){
@@ -56,5 +62,28 @@ class MpMvcBootApplicationTests {
         System.out.println(pages);
         List<Dish> records = page.getRecords();
         records.stream().forEach(System.out::println);
+    }
+
+//    @Test
+//    public  void photo() throws IOException {
+//        // Read from a file
+//        String IMAGE_PATH="src/main/resources/static/photo/";
+//        String imageName = "braisedChickenOld.jpg";
+//        String srcPath = IMAGE_PATH + imageName;
+//
+//        imageName = "braisedChicken.jpg";
+//        String destPath = IMAGE_PATH + imageName;
+//        boolean forceSize = true;
+//        PhotoUtils.resizeImage(srcPath,destPath,200,160,forceSize);
+//
+//    }
+
+    @Test
+    public  void test2(){
+      String s="dadfqdadvfd.jpg";
+        String[] split = s.split("\\.");
+        for(String s1:split){
+            System.out.println(s1);
+        }
     }
 }

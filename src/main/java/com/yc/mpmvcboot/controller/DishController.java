@@ -4,17 +4,29 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yc.mpmvcboot.pojo.Dish;
 import com.yc.mpmvcboot.service.serviceImpl.DishServiceImpl;
+import com.yc.mpmvcboot.service.serviceImpl.QiniuServiceImpl;
+import com.yc.mpmvcboot.utils.PhotoUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
+@Slf4j
 public class DishController {
    private  final  static  Integer pageSize=4;
+
+   private  final static  String filePath="E:/mp-mvc-boot/src/main/resources/static/photo/";
+
+   @Autowired
+   private QiniuServiceImpl qiniuService;
+
     @Autowired
     private DishServiceImpl dishService;
 
@@ -58,8 +70,12 @@ public class DishController {
 
     @GetMapping("/deleteDish/{id}/{dishNum}/{pageNum}")
     public String deleteDish(@PathVariable("id")Integer id,@PathVariable("dishNum")Integer dishNum,@PathVariable("pageNum")Integer pageNum){
+        Dish dish = dishService.getBaseMapper().selectById(id);
+        String name=dish.getPhoto();
         dishService.removeById(id);
         if(dishNum==1)pageNum=pageNum-1;
+        File file = new File(filePath + name);
+        file.delete();
         return "redirect:/admin/getDishByPage/"+pageNum.toString();
     }
 
@@ -82,9 +98,26 @@ public class DishController {
         return "addHtml";
     }
 
-    @GetMapping("/addCheck")
-    public  String  addCheck(Dish dish){
+    @GetMapping("/addPhotoHtml")
+    public  String addPhotoHtml(){
+        return  "addPhotoHtml";
+    }
+
+    @GetMapping("/addCheck/{fileName}")
+    public  String  addCheck(@PathVariable("fileName") String fileName,Dish dish) throws IOException {
+        log.info("-------------");
+        log.info(fileName);
+        log.info("----------------");
+        String[] split = fileName.split("\\.");
+        String last=split[split.length-1];
+        log.info(last);
+        dish.setPhoto(dish.getName()+"."+last);
         dishService.getBaseMapper().insert(dish);
+        String srcFile ="E:/mp-mvc-boot/src/main/resources/static/photo/"+fileName;
+        String destFile="E:/mp-mvc-boot/src/main/resources/static/photo/"+dish.getName()+"."+last;
+        PhotoUtils.resizeImage(srcFile,destFile,200,160,true);
+        File file = new File(srcFile);
+        file.delete();
         Page<Dish> page = dishService.page(new Page<>(1, pageSize));
         long pages = page.getPages();
         Integer pageNum=(int) pages;

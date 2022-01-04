@@ -11,7 +11,7 @@
 </head>
 <body>
 <h3>请输入添加的信息</h3>
-<form class="form-inline" th:action="@{/addCheck}">
+<form class="form-inline" th:action="@{/addCheck/}+${fileName}" enctype="multipart/form-data">
   <div class="form-group">
     <label for="exampleInputName2">Name</label>
     <input type="text" name="name" class="form-control" id="exampleInputName2" >
